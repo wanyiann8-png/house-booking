@@ -1,0 +1,108 @@
+# =========================
+# GENERAL
+# =========================
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.swo
+.env
+.env.*
+*.local
+
+# =========================
+# PYTHON / DJANGO
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Django stuff
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# Migrations (optional: keep if you want tracked history)
+**/migrations/*
+!**/migrations/__init__.py
+
+# Django cache
+.cache/
+
+# =========================
+# NODE / JAVASCRIPT
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Lock files (keep ONE depending on your package manager)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# =========================
+# VITE (React)
+# =========================
+dist/
+.vite/
+
+# =========================
+# NEXT.JS
+# =========================
+.next/
+out/
+.next/cache/
+
+# =========================
+# BUILD OUTPUTS
+# =========================
+build/
+coverage/
+
+# =========================
+# TYPESCRIPT
+# =========================
+*.tsbuildinfo
+
+# =========================
+# IDE / EDITOR
+# =========================
+.vscode/
+.idea/
+*.iml
+
+# =========================
+# TESTING
+# =========================
+coverage/
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+
+# =========================
+# SECURITY / SECRETS
+# =========================
+*.pem
+*.key
+*.crt
+
+# =========================
+# DOCKER (optional)
+# =========================
+docker-compose.override.yml
+
+# =========================
+# OS GENERATED FILES
+# =========================
+Desktop.ini

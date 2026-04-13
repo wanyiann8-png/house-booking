@@ -58,7 +58,7 @@ check_out =models.DateTimeField(auto_now_add=True)
 guests =models.IntegerField()
 total_price =models.DecimalField(max_digits=7, decimal_places=5)
 status =models.CharField(max_length=10)
-created_at =models.DateTimeField(auto_now_add=True)
+created_at =models.DateTimeField(auto_now_add=True) 
 def __str__(self):
     return self.name
 

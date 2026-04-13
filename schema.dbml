@@ -1,0 +1,122 @@
+Table users {
+  id int [pk]
+  username varchar
+  email varchar [unique]
+  password varchar
+  is_active boolean [default: true]
+  created_at datetime
+
+  Note: "Use Django AbstractUser. Avoid storing raw passwords manually."
+}
+
+Table profiles {
+  id int [pk]
+  user_id int [ref: > users.id]
+  full_name varchar
+  phone varchar
+  is_host boolean [default: false]
+  avatar_url varchar
+  bio text
+
+  Note: "Separates auth from profile data. Easier to extend later."
+}
+
+Table listings {
+  id int [pk]
+  host_id int [ref: > users.id]
+  title varchar
+  description text
+  location varchar
+  latitude decimal
+  longitude decimal
+  price_per_night decimal
+  cleaning_fee decimal
+  max_guests int
+  is_active boolean [default: true]
+  created_at datetime
+  updated_at datetime
+
+  Note: "Lat/lng added for future map/search support."
+}
+
+Table amenities {
+  id int [pk]
+  name varchar [unique]
+
+  Note: "Examples: WiFi, Kitchen, Parking"
+}
+
+Table listing_amenities {
+  id int [pk]
+  listing_id int [ref: > listings.id]
+  amenity_id int [ref: > amenities.id]
+}
+
+Table listing_images {
+  id int [pk]
+  listing_id int [ref: > listings.id]
+  image_url varchar
+  is_primary boolean [default: false]
+
+  Note: "One image can be marked as cover"
+}
+
+Table bookings {
+  id int [pk]
+  user_id int [ref: > users.id]
+  listing_id int [ref: > listings.id]
+  check_in date
+  check_out date
+  guests int
+  total_price decimal
+  status varchar // pending, confirmed, cancelled, completed
+  created_at datetime
+
+  Note: "Validate overlapping bookings in backend logic"
+}
+
+Table payments {
+  id int [pk]
+  booking_id int [ref: > bookings.id]
+  amount decimal
+  payment_method varchar // card, mpesa, etc
+  status varchar // pending, paid, failed
+  transaction_ref varchar
+  created_at datetime
+
+  Note: "Keep simple. Integrate Stripe/M-Pesa later."
+}
+
+Table reviews {
+  id int [pk]
+  user_id int [ref: > users.id]
+  listing_id int [ref: > listings.id]
+  booking_id int [ref: > bookings.id]
+  rating int
+  comment text
+  created_at datetime
+
+  Note: "Tie review to booking to prevent fake reviews"
+}
+
+Table availability {
+  id int [pk]
+  listing_id int [ref: > listings.id]
+  date date
+  is_available boolean
+
+  Note: "Optional optimization. Can skip initially."
+}
+
+Table wishlists {
+  id int [pk]
+  user_id int [ref: > users.id]
+  name varchar
+  created_at datetime
+}
+
+Table wishlist_items {
+  id int [pk]
+  wishlist_id int [ref: > wishlists.id]
+  listing_id int [ref: > listings.id]
+}
